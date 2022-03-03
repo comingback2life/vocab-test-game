@@ -7,9 +7,10 @@ import Question from './Question'
 import Form from 'react-bootstrap/Form'
 const GameCard = ()=>{
   let fetchedWord="" //the word fetched from the random words api
-  const [wordDefinition,setWordDefinition]= useState();
-  const [correctAnswer, setCorrectAnswer] = useState("");
-  const [answer,setAnswer] = useState("");
+  const [wordDefinition,setWordDefinition]= useState(); //the real word definition
+  const [correctAnswer, setCorrectAnswer] = useState(""); //the read word
+  const [score,setScore] = useState(0) //user score
+  let userAnswer=""; //userAnswer
   const fetchDefinition = async ()=>{
     const wordUrl = 'https://random-words-api.vercel.app/word';
     await fetch(wordUrl)
@@ -23,13 +24,12 @@ const getWord = (fetchedWord)=>{
  setWordDefinition(fetchedWord.definition)
   setCorrectAnswer(fetchedWord.word)
 }
-const setUserAnswer=(x)=>{
-  setAnswer(x);
-  console.log(answer);
-}
 const submitted = (event)=>{
   event.preventDefault();
-  console.log(event.target[0].value)
+  tallyAnswers(event.target[0].value)
+}
+const tallyAnswers=(ax)=>{
+  console.log(ax)
 }
 
   return(
@@ -39,7 +39,7 @@ const submitted = (event)=>{
     <Card.Body>
       <Row>
         <Col className="scoreboard">
-        <p> Score : 0.00</p>
+        <p> Score : {score}</p>
         <p>{correctAnswer}</p>
         <Buttons btnText="Reset"></Buttons>
         </Col>
