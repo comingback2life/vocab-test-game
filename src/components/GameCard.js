@@ -5,15 +5,11 @@ const GameCard = ()=>{
   return(
     <Card>
   <Card.Body>
-    <Row>
-      <Col>
-      <Title></Title>
-      </Col>
-    <Col>
-    <p>Welcome</p>
-    </Col>
-    </Row>
-   
+      <Row>
+        <Col>
+       <p>My Name is Anthony G</p> 
+        </Col>
+        </Row>  
   </Card.Body>
 </Card>
   )
