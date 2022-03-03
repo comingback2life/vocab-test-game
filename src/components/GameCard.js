@@ -6,13 +6,25 @@ import { AnswerBox } from './AnswerBox';
 import Question from './Question'
 
 const GameCard = ()=>{
-  let randomWord="";
+  let fetchedWord="" //the word fetched from the random words api
   const [wordDefinition,setWordDefinition]= useState();
-  const fetchDefinition = ()=>{
-    
+  const fetchDefinition = async ()=>{
+    const wordUrl = 'https://random-words-api.vercel.app/word';
+    await fetch(wordUrl)
+    .then(res=>res.json())
+    .then(data=>{
+      fetchedWord=data[0];
+    })
+    getWord(fetchedWord)
   }
+const getWord = (fetchedWord)=>{
+ setWordDefinition(fetchedWord.definition)
+ console.log(fetchedWord);
+}
   return(
-    <Card>
+    <div>
+      <p className="text-center" onClick={()=>fetchDefinition()}>Click here to get Started</p>
+  <Card>
     <Card.Body>
       <Row>
         <Col className="scoreboard">
@@ -20,13 +32,15 @@ const GameCard = ()=>{
         <Buttons btnText="Reset"></Buttons>
         </Col>
         <Col className="col-9 text-center">
-          <Question wordDefinition={wordDefinition || "Click here to get started."}></Question>
+          <Question wordDefinition={wordDefinition}></Question>
           <AnswerBox></AnswerBox>
-          <Buttons btnText="Submit"></Buttons>
+          <Buttons btnText="Submit" handleOnClick={getWord}></Buttons>
         </Col>
         </Row>  
   </Card.Body>
 </Card>
+    </div>
+  
   )
 }
 export default GameCard;
