@@ -1,20 +1,21 @@
 import Card from 'react-bootstrap/Card';
-import Title from './Title';
 import{Row,Col} from 'react-bootstrap'
 import { Buttons } from './Buttons';
 import { AnswerBox } from './AnswerBox';
+import Question from './Question'
 const GameCard = ()=>{
   return(
     <Card>
-  <Card.Body>
+    <Card.Body>
       <Row>
         <Col className="scoreboard">
         <p> Score : 0.00</p>
+        <Buttons btnText="Reset"></Buttons>
         </Col>
         <Col className="col-9 text-center">
+          <Question></Question>
           <AnswerBox></AnswerBox>
-          <Buttons value="Submit"></Buttons>
-          <Buttons value="Reset"></Buttons>
+          <Buttons btnText="Submit"></Buttons>
         </Col>
         </Row>  
   </Card.Body>
