@@ -6,9 +6,11 @@ export const CardFooter = ({handleOnClick,score,answer}) => {
       <p className="text-center" onClick={handleOnClick}>Click me to start</p>
     )
   }else{
-    return (
-      <p className="text-center">The correct answer is {answer}</p>
-    )
+      return (
+        <p className="text-center">The correct answer is {answer}</p>
+      )
+    
+  
   }
 
 }

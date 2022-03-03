@@ -12,9 +12,10 @@ const GameCard = ()=>{
   const [correctAnswer, setCorrectAnswer] = useState(""); //the read word
   const [score,setScore] = useState(0) //user score
   const [footerText,setFooterText]=useState("Click me to start");
-  const [displayAnswer,setdisplayAnswer] =useState("")
+  const [displayAnswer,setDisplayAnswer] =useState("");
   let userAnswer=""; //userAnswer
   const fetchDefinition = async ()=>{
+ 
     const wordUrl = 'https://random-words-api.vercel.app/word';
     await fetch(wordUrl)
     .then(res=>res.json())
@@ -33,22 +34,23 @@ const submitted = (event)=>{
    return
   }else{
     let x = event.target[0].value
-    console.log(x)
     x=x.charAt(0).toUpperCase()+x.slice(1) // making the first letter capital
-    tallyAnswers(x)
-    event.target[0].value=""; //reseting the text box
+    tallyAnswers(x);
   }
   fetchDefinition();
+  event.target[0].value=""; //reseting the text box
 }
 const tallyAnswers=(ax)=>{
   userAnswer = ax;
   if(ax===correctAnswer){
     setScore(score+1);
+    setDisplayAnswer(correctAnswer)
   }else{
-    setFooterText(`The correct answer is ${correctAnswer}`)
+    setScore(score-1)
+    setDisplayAnswer(correctAnswer)
   }
 }
-const updateScore=(event)=>{
+const updateScore=()=>{
   setScore(0);
 }
 
@@ -59,7 +61,6 @@ const updateScore=(event)=>{
       <Row>
         <Col className="scoreboard">
         <p> Score : {score}</p>
-        <p>{correctAnswer}</p>
         <Buttons btnText="Reset" handleOnClick={()=>updateScore} score={score}></Buttons>
         </Col>
         <Col className="col-9 text-center">
@@ -73,7 +74,7 @@ const updateScore=(event)=>{
        
         <Card.Footer>
         {/* <p className="text-center" onClick={()=>fetchDefinition(score)}>{footerText}</p> */}
-        <CardFooter score={score} handleOnClick={()=>fetchDefinition()} answer={correctAnswer}></CardFooter>
+        <CardFooter score={score} handleOnClick={()=>fetchDefinition()} answer={displayAnswer}></CardFooter>
         </Card.Footer> 
   </Card.Body>
 </Card>
