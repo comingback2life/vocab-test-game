@@ -27,11 +27,12 @@ const getWord = (fetchedWord)=>{
 const submitted = (event)=>{
   event.preventDefault();
   tallyAnswers(event.target[0].value)
+  fetchDefinition();
 }
 const tallyAnswers=(ax)=>{
   const userans = ax;
   if(userans===correctAnswer){
-    console.log("w")
+    setScore(score+1);
   }
 }
 
