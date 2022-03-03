@@ -29,7 +29,10 @@ const submitted = (event)=>{
   tallyAnswers(event.target[0].value)
 }
 const tallyAnswers=(ax)=>{
-  console.log(ax)
+  const userans = ax;
+  if(userans===correctAnswer){
+    console.log("w")
+  }
 }
 
   return(
