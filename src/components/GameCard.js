@@ -4,10 +4,12 @@ import{Row,Col} from 'react-bootstrap'
 import { Buttons } from './Buttons';
 import { AnswerBox } from './AnswerBox';
 import Question from './Question'
-
+import Form from 'react-bootstrap/Form'
 const GameCard = ()=>{
   let fetchedWord="" //the word fetched from the random words api
   const [wordDefinition,setWordDefinition]= useState();
+  const [correctAnswer, setCorrectAnswer] = useState("");
+  const [answer,setAnswer] = useState("");
   const fetchDefinition = async ()=>{
     const wordUrl = 'https://random-words-api.vercel.app/word';
     await fetch(wordUrl)
@@ -19,7 +21,11 @@ const GameCard = ()=>{
   }
 const getWord = (fetchedWord)=>{
  setWordDefinition(fetchedWord.definition)
- console.log(fetchedWord);
+  setCorrectAnswer(fetchedWord.word)
+}
+const setUserAnswer=(x)=>{
+  setAnswer(x);
+  console.log(answer);
 }
   return(
     <div>
@@ -29,12 +35,15 @@ const getWord = (fetchedWord)=>{
       <Row>
         <Col className="scoreboard">
         <p> Score : 0.00</p>
+        <p>{correctAnswer}</p>
         <Buttons btnText="Reset"></Buttons>
         </Col>
         <Col className="col-9 text-center">
+          <Form>
           <Question wordDefinition={wordDefinition}></Question>
           <AnswerBox></AnswerBox>
-          <Buttons btnText="Submit" handleOnClick={getWord}></Buttons>
+          <Buttons btnText="Submit" displayFunc={setAnswer}></Buttons>
+          </Form>
         </Col>
         </Row>  
   </Card.Body>

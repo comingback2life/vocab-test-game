@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button'
 
 export const Buttons =({btnText,displayFunc})=>{
-
+  
   {
     if(btnText==="Submit"){
      return <Button variant="success" className='m-2'>{btnText}</Button>
