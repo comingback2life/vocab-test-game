@@ -8,21 +8,23 @@ import Question from './Question'
 const GameCard = ()=>{
   const [wordDefinition,setWordDefinition]= useState();
   const wordsURL = 'https://random-word-api.herokuapp.com/word?number=20&swear=0'
-  let wordsList=[];
 
-const getWords =()=>{
   const fetchWords= async ()=>{
-    wordsList = await fetch(wordsURL)
+      await fetch(wordsURL)
     .then(res=>{return res.json()})
-    .then(data=>wordsList.push(data));
-    getWords(wordsList)
+    .then(data=>{
+      let wordsList=[];
+      wordsList.push(data[0]);
+        getData(wordsList)
+    })
   }
-  fetchWords();
-}
+
 
 const getData=(x)=>{
-  const randomNumber = Math.ceil(Math.random()*(10-1)+1);
-  console.log(x)
+const generateRandomNumber = ()=>{
+  return (Math.ceil(Math.random()*(x.length-1)+1)); //assumming that there is atleast one data coming back 
+}
+  getDefintion(x[generateRandomNumber()])
 }
 const getDefintion=()=>{
   const randomWord= "" || "hello";
@@ -35,7 +37,7 @@ const getDefintion=()=>{
     })
     }
 }
-getData();
+fetchWords();
   return(
     <Card>
     <Card.Body>
