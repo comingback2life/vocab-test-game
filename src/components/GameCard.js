@@ -8,18 +8,9 @@ import Question from './Question'
 const GameCard = ()=>{
   let randomWord="";
   const [wordDefinition,setWordDefinition]= useState();
-const getDefintion=(randomWord)=>{
-  const definitionURL = `https://api.dictionaryapi.dev/api/v2/entries/en/${randomWord}`
-  const fetchDefinition= async ()=>{
-   await fetch(definitionURL)
-    .then(res=>res.json())
-    .then(data=>{
-    setWordDefinition(data[0].meanings[0].definitions[0].definition)
-    })
-    }
-    fetchDefinition();
-}
-
+  const fetchDefinition = ()=>{
+    
+  }
   return(
     <Card>
     <Card.Body>
