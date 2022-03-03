@@ -1,11 +1,11 @@
 import Button from 'react-bootstrap/Button'
-import InputGroup from 'react-bootstrap/InputGroup'
-import Form from 'react-bootstrap/Form'
-export const Buttons =()=>{
-  return(
-    <InputGroup className="mb-3">
-    <Form.Control type="text"
-    />
-  </InputGroup>
-  )
+
+export const Buttons =({value})=>{
+  {
+    if(value==="Submit"){
+     return <Button variant="success" className='m-2'>{value}</Button>
+    }else{
+      return <Button variant="danger" className='m-2'>{value}</Button>
+    }
+  }
 }
