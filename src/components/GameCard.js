@@ -5,11 +5,14 @@ import { Buttons } from './Buttons';
 import { AnswerBox } from './AnswerBox';
 import Question from './Question'
 import Form from 'react-bootstrap/Form'
+import {CardFooter} from './CardFooter'
 const GameCard = ()=>{
   let fetchedWord="" //the word fetched from the random words api
   const [wordDefinition,setWordDefinition]= useState(); //the real word definition
   const [correctAnswer, setCorrectAnswer] = useState(""); //the read word
   const [score,setScore] = useState(0) //user score
+  const [footerText,setFooterText]=useState("Click me to start");
+  const [displayAnswer,setdisplayAnswer] =useState("")
   let userAnswer=""; //userAnswer
   const fetchDefinition = async ()=>{
     const wordUrl = 'https://random-words-api.vercel.app/word';
@@ -26,35 +29,52 @@ const getWord = (fetchedWord)=>{
 }
 const submitted = (event)=>{
   event.preventDefault();
-  tallyAnswers(event.target[0].value)
+  if(event.target[0].value==="" ){
+   return
+  }else{
+    let x = event.target[0].value
+    console.log(x)
+    x=x.charAt(0).toUpperCase()+x.slice(1) // making the first letter capital
+    tallyAnswers(x)
+    event.target[0].value=""; //reseting the text box
+  }
   fetchDefinition();
 }
 const tallyAnswers=(ax)=>{
-  const userans = ax;
-  if(userans===correctAnswer){
+  userAnswer = ax;
+  if(ax===correctAnswer){
     setScore(score+1);
+  }else{
+    setFooterText(`The correct answer is ${correctAnswer}`)
   }
+}
+const updateScore=(event)=>{
+  setScore(0);
 }
 
   return(
     <div>
-      <p className="text-center" onClick={()=>fetchDefinition()}>Click here to get Started</p>
     <Card>
     <Card.Body>
       <Row>
         <Col className="scoreboard">
         <p> Score : {score}</p>
         <p>{correctAnswer}</p>
-        <Buttons btnText="Reset"></Buttons>
+        <Buttons btnText="Reset" handleOnClick={()=>updateScore} score={score}></Buttons>
         </Col>
         <Col className="col-9 text-center">
-          <Form onSubmit={submitted}>
+        <Form onSubmit={submitted}>
           <Question wordDefinition={wordDefinition}></Question>
           <AnswerBox></AnswerBox>
           <Buttons btnText="Submit"></Buttons>
           </Form>
         </Col>
-        </Row>  
+        </Row> 
+       
+        <Card.Footer>
+        {/* <p className="text-center" onClick={()=>fetchDefinition(score)}>{footerText}</p> */}
+        <CardFooter score={score} handleOnClick={()=>fetchDefinition()} answer={correctAnswer}></CardFooter>
+        </Card.Footer> 
   </Card.Body>
 </Card>
     </div>
