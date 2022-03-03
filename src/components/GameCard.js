@@ -27,10 +27,15 @@ const setUserAnswer=(x)=>{
   setAnswer(x);
   console.log(answer);
 }
+const submitted = (event)=>{
+  event.preventDefault();
+  console.log(event.target[0].value)
+}
+
   return(
     <div>
       <p className="text-center" onClick={()=>fetchDefinition()}>Click here to get Started</p>
-  <Card>
+    <Card>
     <Card.Body>
       <Row>
         <Col className="scoreboard">
@@ -39,10 +44,10 @@ const setUserAnswer=(x)=>{
         <Buttons btnText="Reset"></Buttons>
         </Col>
         <Col className="col-9 text-center">
-          <Form>
+          <Form onSubmit={submitted}>
           <Question wordDefinition={wordDefinition}></Question>
           <AnswerBox></AnswerBox>
-          <Buttons btnText="Submit" displayFunc={setAnswer}></Buttons>
+          <Buttons btnText="Submit"></Buttons>
           </Form>
         </Col>
         </Row>  
