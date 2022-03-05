@@ -16,15 +16,6 @@ Negative marking for wrong answer.
  
 
 
-## Installation
-
-Download the code in your local machine
-
-```bash
-  cd vocab-tester
-  npm start
-```
-    
     
 ## Run Locally
 
